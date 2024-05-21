@@ -1,0 +1,29 @@
+spring.application.name: grade
+
+info.app.name: ${spring.application.name}
+
+server.port: 0
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5436/db
+    username: postgres
+    password: postgres
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    preferIpAddress: true
+    instanceId: ${spring.application.name}:${random.int[1,100]}
+
+kafka:
+  consumer:
+    hotel-created-event-consumer:
+      bootstrap-servers: localhost:9092
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      group-id: hotel-created
+      properties.spring.json.type.mapping: hotel-created-event:com.ip13.main.event.HotelCreatedEvent

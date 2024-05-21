@@ -1,0 +1,18 @@
+package com.ip13.main.model.entity
+
+import jakarta.persistence.Entity
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
+import jakarta.persistence.Id
+import java.time.LocalDateTime
+
+@Entity
+class HotelConstraint(
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Int = 0,
+    val hotelId: Int = 0,
+    val reason: String = "",
+    val fromDate: LocalDateTime = LocalDateTime.now(),
+    val tillDate: LocalDateTime = LocalDateTime.now(),
+)

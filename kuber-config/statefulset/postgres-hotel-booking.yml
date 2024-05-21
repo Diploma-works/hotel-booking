@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres-hotel-booking
+  labels:
+    app: postgres-hotel-booking
+spec:
+  serviceName: postgres-hotel-booking
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: postgres-hotel-booking
+    spec:
+      containers:
+        - name: postgres-hotel-booking
+          image: postgres:16.0
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - mountPath: /data
+              name: postgres-hotel-booking-pvc
+          env:
+            - name: POSTGRES_DB
+              value: db
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: postgres
+  selector:
+    matchLabels:
+      app: postgres-hotel-booking
+  volumeClaimTemplates:
+    - metadata:
+        name: postgres-hotel-booking-pvc
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 100Mi

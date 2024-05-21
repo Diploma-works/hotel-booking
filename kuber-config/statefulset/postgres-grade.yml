@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres-grade
+  labels:
+    app: postgres-grade
+spec:
+  serviceName: postgres-grade
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: postgres-grade
+    spec:
+      containers:
+        - name: postgres-grade
+          image: postgres:16.0
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - mountPath: /data
+              name: postgres-grade-pvc
+          env:
+            - name: POSTGRES_DB
+              value: db
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: postgres
+  selector:
+    matchLabels:
+      app: postgres-grade
+  volumeClaimTemplates:
+    - metadata:
+        name: postgres-grade-pvc
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 100Mi

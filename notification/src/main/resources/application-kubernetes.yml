@@ -1,0 +1,16 @@
+spring.application.name: notification
+
+info.app.name: ${spring.application.name}
+
+server.port: 8504
+
+eureka.client.enabled: false
+
+kafka:
+  consumer:
+    restaurant-created-event-consumer:
+      bootstrap-servers: restaurant-created-event-kafka-bootstrap:9092
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      group-id: restaurant-created
+      properties.spring.json.type.mapping: restaurant-created-event:com.ip13.main.event.RestaurantCreatedEvent

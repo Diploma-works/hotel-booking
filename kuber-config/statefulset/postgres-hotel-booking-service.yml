@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-hotel-booking-service
+spec:
+  type: ClusterIP
+  clusterIP: None
+  selector:
+    app: postgres-hotel-booking

@@ -1,0 +1,25 @@
+spring.application.name: auth
+
+info.app.name: ${spring.application.name}
+
+server.port: 8500
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://postgres-auth:5432/db
+    username: postgres
+    password: postgres
+
+eureka.client.enabled: false
+
+springdoc:
+  api-docs:
+    path: /auth/v3/api-docs
+  swagger-ui:
+    path: /auth/swagger-ui.html
+
+security:
+  secret: s2UowvHf2hU16VQCMvzESEzh+JCg8NN5OL0gqMpglCggh5OKE+lLmIGLSYqTuacu
+  lifeTimeSeconds: 86400
+  mega_admin: mega_admin

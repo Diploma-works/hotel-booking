@@ -1,0 +1,20 @@
+spring.application.name: hotel-info
+
+info.app.name: ${spring.application.name}
+
+server.port: 0
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5434/db
+    username: postgres
+    password: postgres
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    preferIpAddress: true
+    instanceId: ${spring.application.name}:${random.int[1,100]}

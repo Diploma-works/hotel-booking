@@ -1,0 +1,20 @@
+spring.application.name: hotel-info
+
+info.app.name: ${spring.application.name}
+
+server.port: 8501
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://postgres-hotel-info:5432/db
+    username: postgres
+    password: postgres
+
+eureka.client.enabled: false
+
+springdoc:
+  api-docs:
+    path: /auth/v3/api-docs
+  swagger-ui:
+    path: /auth/swagger-ui.html
